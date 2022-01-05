@@ -118,8 +118,8 @@ function love.load()
     -- 4. 'done' (the game is over, with a victor, ready for restart)
     gameState = 'start'
 
-    -- the state of IA, for player 2, can be true of false
-    enabledIA = false
+    -- the state of AI, for player 2, can be true of false
+    enabledAI = false
 end
 
 --[[
@@ -248,7 +248,7 @@ function love.update(dt)
     end
 
     -- player 2
-    if enabledIA then
+    if enabledAI then
         if ball.x > (VIRTUAL_WIDTH/3*2) then
             if (ball.y + ball.height/2) < (player2.y + player2.height/3) then
                 player2.dy = -PADDLE_SPEED
@@ -318,7 +318,7 @@ function love.keypressed(key)
         end
     elseif string.upper(key) == 'I' then
         if gameState == 'start' or gameState == 'done' then
-            enabledIA = not enabledIA
+            enabledAI = not enabledAI
         end
     end
 end
@@ -339,7 +339,7 @@ function love.draw()
     love.graphics.printf('Player 2', 0, 10, VIRTUAL_WIDTH, 'right')
 
     enabledX = ' '
-    if enabledIA then
+    if enabledAI then
         enabledX = 'X'
     end
     -- render different things depending on which part of the game we're in
@@ -348,7 +348,7 @@ function love.draw()
         love.graphics.setFont(smallFont)
         love.graphics.printf('Welcome to Pong!', 0, 10, VIRTUAL_WIDTH, 'center')
         love.graphics.printf('Press Enter to begin!', 0, 20, VIRTUAL_WIDTH, 'center')
-        love.graphics.printf('Set IA (I) [' .. enabledX .. ']', 0, 20, VIRTUAL_WIDTH, 'right')
+        love.graphics.printf('Set AI (i) [' .. enabledX .. ']', 0, 20, VIRTUAL_WIDTH, 'right')
     elseif gameState == 'serve' then
         -- UI messages
         love.graphics.setFont(smallFont)
@@ -364,7 +364,7 @@ function love.draw()
             0, 10, VIRTUAL_WIDTH, 'center')
         love.graphics.setFont(smallFont)
         love.graphics.printf('Press Enter to restart!', 0, 30, VIRTUAL_WIDTH, 'center')
-        love.graphics.printf('Set IA (i) [' .. enabledX .. ']', 0, 20, VIRTUAL_WIDTH, 'right')
+        love.graphics.printf('Set AI (i) [' .. enabledX .. ']', 0, 20, VIRTUAL_WIDTH, 'right')
     end
 
     -- show the score before ball is rendered so it can move over the text
